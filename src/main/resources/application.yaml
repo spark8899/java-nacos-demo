@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: nacos-config-demo
+
+logging:
+  level:
+    com.example: DEBUG
+    com.alibaba.nacos: INFO
