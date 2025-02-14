@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+  labels:
+    application: test-nacos
+  name: test-nacos
+  namespace: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      application: test-nacos
+  template:
+    metadata:
+      labels:
+        application: test-nacos
+    spec:
+      containers:
+        - name: test-nacos
+          command:
+            - java
+            - '-jar'
+            - /opt/app/server.jar
+            - >-
+              --spring.cloud.nacos.config.server-addr=nacos.xxx.xxx:8848
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: >-
+                -Dfile.encoding=en_US.UTF-8 -Xms64m -Xmx64m
+          image: >-
+            <Docker image source address>
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1
+              memory: 128Mi
+            requests:
+              cpu: 0.5
+              memory: 16Mi
